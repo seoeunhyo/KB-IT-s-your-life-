@@ -1,0 +1,41 @@
+int no = Integer.parseInt("A");
+String s = Integer.toString(4);
+double no = Math.random();
+
+class앞에도 제한자가 올 수 있으나 public이거나 생략만 가능하다.
+클래스.메소드()로 바로 호출하는 것은 static 메소드인 것이다.
+
+================================================================
+public class Integer{
+	public static int parseInt(String s){
+		return a;	
+	}
+	public static String toString(int n){
+		return n;
+	}
+}
+
+public class Math{
+	public static double (){
+		return a;
+	}
+}
+
+=================================================================
+this keyword 
+	: 현재 생성된 객체를 뜻함
+	
+	1) this.변수이름
+		: 현재 객체의 전역 변수를 뜻함(지역변수와 전역변수 이름이 같을 때 주로 사용)
+
+	2) this.메소드 이름(값, 값, ....)
+		: 현재 객체의 메소드를 호출
+
+	3) this(값, 값,....)
+		: 현재 객체의 다른 생성자 호출
+		반드시 생성자 구현부 첫줄에서만 가능하다!
+
+
+====================
+ringBuilder sb = new StringBuilder(); ->  사용
+delta data = 감소하거나 변하는 데이터 

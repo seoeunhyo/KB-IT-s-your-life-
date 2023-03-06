@@ -1,0 +1,61 @@
+ - Overloading
+ ① 하나의 class 내부에 method이름이 같은 method 여러 개 있는 것
+ ② 하나의 method이름을 가지고 기능을 다르게 구현하는 것 ⇨ 이용자 편의
+ ③ 작성규칙
+   ▪ modifier(접근제한자) 같아도 달라도 상관없음. 
+   ▪ returnType 같아도 달라도 상관없음. 
+   ▪ method이름 반드시 같아야 한다. 
+   ▪ 단, 인수는 무조건 인수의 순서 or Type or 개수가(셋 중하나가) 달라야 한다. 
+
+* 사용자 편의성을 위함
+* 일을 여러가지로 분기 
+
+ex)
+
+class Test{
+
+	public void aa(){}
+		System.out.println(1);
+	public void aa(int i){
+		System.out.println(2);
+	}	
+	
+	protected int aa(String s){
+		System.out.println(3);
+		return 4;
+	}
+
+	void aa(int i, String s){
+		System.out.println(4);
+	}
+
+}
+
+
+/////////////////////////////////////////////////
+메소드 호출 
+   Test t = new Test();
+   t.aa(); //1
+   t.aa("안녕"); //3
+
+
+   ex)
+ 	System.out.println();
+	System.out.println(4);
+	System.out.println(4.5);
+	System.out.println("안녕");
+
+
+====================================================================
+
+	* 인수를 0개 이상 전달할 수 있는 문법
+	ex)
+	    public void aa(int i ){}  // 정수 한개 무조건
+    	    public void aa(int ...i ){}  // 정수 0개 이상 허용 
+
+	~.aa();
+	~aa(4);
+	~aa(4, 3, ,2, 1);	
+
+
+	ex) printf() 메소드 제공!!
