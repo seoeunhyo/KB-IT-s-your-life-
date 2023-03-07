@@ -7,13 +7,14 @@ public class TestView {
 		
 		BankService service = new BankService();
 		
-		AccountDto[] accountList = service.getAccountList(400);
+		AccountDto[] accountList = service.getAccountList(100);
 		
 		if(accountList == null) {
 			System.out.println("회원의 계좌 정보가 없습니다.");
 		}else{
 			for(AccountDto x : accountList) {
-				System.out.println(x.accountNumber);
+				//System.out.println(x.accountNumber);
+				System.out.println(x.toString());
 			}
 		}
 		System.out.println();

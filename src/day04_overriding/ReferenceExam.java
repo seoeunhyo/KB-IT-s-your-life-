@@ -2,12 +2,17 @@ package day04_overriding;
 
 
 class ObjectExam{
+	String str;
 	public ObjectExam(){   }
-	public ObjectExam(String str){   }
+	public ObjectExam(String str){  
+		this.str = str + "=" + super.toString();
+	}
+	
+	
 	@Override
 	public String toString() {
 	
-		return "쉬고 싶다!";
+		return str;
 	}
 }
 class ReferenceExam{
@@ -25,7 +30,7 @@ class ReferenceExam{
 			}
 			String s03=new String("월요일");
 			
-			ObjectExam oe1=new ObjectExam();
+			ObjectExam oe1=new ObjectExam("언제 쉴거야?");
 			ObjectExam oe2=new ObjectExam("안녕");
 			
 			System.out.println(c);//
@@ -41,8 +46,7 @@ class ReferenceExam{
 			
 ///////////////////////////////////////////////////////
 			
-			System.out.println(oe1.toString());//주소 값
-			System.out.println(oe2.toString());//주소 값 
-			
+			System.out.println(oe1);//주소 값
+			System.out.println(oe2);//주소 값 
 	}
 }
