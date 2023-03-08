@@ -1,5 +1,8 @@
 package DAY4_com.itskb.ws03.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestView {
 
 	public static void main(String[] args) {
@@ -7,30 +10,38 @@ public class TestView {
 		
 		BankService service = new BankService();
 		
-		AccountDto[] accountList = service.getAccountList(100);
-		
+		ArrayList<AccountDto> accountList = service.getAccountList(100);
+		ArrayList<UserDto> userList = service.getUserDetail(100);
+
 		if(accountList == null) {
 			System.out.println("회원의 계좌 정보가 없습니다.");
-		}else{
-			for(AccountDto x : accountList) {
-				//System.out.println(x.accountNumber);
-				System.out.println(x.toString());
-			}
+		}
+		for(AccountDto x : accountList) {
+			System.out.println(x);
 		}
 		System.out.println();
 		
 		System.out.println("***2. userSeq에 해당하는 고객의 정보 **********");
-		UserDto userDto = service.getUserDetail(100);
-		if(userDto != null) {
-			System.out.print(userDto.userSeq+" , " + userDto.name+" , "+userDto.email+" , ");
-			System.out.println(userDto.phone+" , " + userDto.isSleep);			
-		}else {
+		if(userList == null) {
 			System.out.println("회원의 계좌 정보가 없습니다.");
-			
+		}
+		for(UserDto x : userList) {
+			System.out.println(x);
+		}
+		System.out.println();
+		System.out.println("***3. *********모든 계좌 리스트 ***************");
+		
+		ArrayList<AccountDto> ad = service.getAccountList();
+		for(AccountDto x : ad) {
+			System.out.println(x);
 		}
 		
 		
-		
+		System.out.println("***4. ********* 잔고로 정렬 ***************");
+		ArrayList<AccountDto> tmp = service.getAccountListSortByBalance();
+		for(AccountDto x : tmp) {
+			System.out.println(x);
+		}
 	}
 
 }

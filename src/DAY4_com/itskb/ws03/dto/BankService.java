@@ -1,106 +1,150 @@
 package DAY4_com.itskb.ws03.dto;
 
-import javax.naming.directory.SearchControls;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-/**
- * 고객과 계좌에 관련된 서비스 
- * (Business Logic을 처리하는 객체)
- **/
+import day05.Student;
 
 public class BankService {
-	//final은 고정 값 = 값 변경 불가(반드시 초기화 필수)
-	final int ACCOUNT_SIZE = 10; /**계좌 최대개수**/
-	final int USER_SIZE = 5; /**고객 최대개수**/
-	int ACCOUNT_CURRENT_SIZE; /**현재 계좌 개수 **/
-	int USER_CURRENT_SIZE; /** 현재 고객의 개수 **/
-	AccountDto[] accountList = new AccountDto[ACCOUNT_SIZE];
-	UserDto[] userList = new UserDto[USER_SIZE];
+	//final은 고정값= 값변경불가 (반드시 초기화 필수)
+	final int ACCOUNT_SIZE = 10; /**계좌 최대개수*/
+	final int USER_SIZE = 5;/**고객 최대개수 */
 	
+	int ACCOUNT_CURRENT_SIZE; /** 현재계좌의 개수 */
+	int USER_CURRENT_SIZE; /**현재 고객의 개수 */
+	
+	
+	ArrayList<AccountDto> accountList = new ArrayList<>();
+	ArrayList<UserDto> userList = new ArrayList<>();
 	
 	/**
-	 * 생성자에서 테스트를 위한 고객 및 계좌 객체를
-	 * 생성하고 배열에 저장한다. 
-	 */
+	 * 생성자에서 테스트를 위한 고객 및 계좌 객체를 생성하고 배열에 저장한다
+	 * */
 	public BankService() {
-		//배열 생성
-		userList = new UserDto[USER_SIZE];
-		accountList = new AccountDto[ACCOUNT_SIZE];
-		
-		
-		//각 배열방에 고객과 계좌를 생성한다.
-		//고객 3명
-		userList[USER_CURRENT_SIZE++] = new UserDto(100, "홍길동", "123@naver", "010-123-123", false);
-		userList[USER_CURRENT_SIZE++] = new UserDto(200, "최치원", "234@naver", "010-456-123", false);
-		userList[USER_CURRENT_SIZE++] = new UserDto(300, "서은효", "456@naver", "010-789-123", false);
-		
-		//계좌 7개 
-		accountList[ACCOUNT_CURRENT_SIZE++] = new AccountDto(1,"111-1111",1000000, 100);
-		accountList[ACCOUNT_CURRENT_SIZE++] = new AccountDto(2,"222-1111",2500000, 100);
-		accountList[ACCOUNT_CURRENT_SIZE++] = new AccountDto(3,"333-1111",4500000, 100);
+
+		// 각 배열방에 고객과 계좌를 생성한다.
+		 //고객 4명
+		 userList.add( new UserDto(100, "장희정", "8253jang@daum.net", "010-8875-8253", false));
+		 userList.add( new UserDto(200, "이효리", "lee@daum.net", "010-2222-3333", false));
+		 userList.add(new UserDto(300, "송중기", "song@naver.com", "010-5554-2222", false));
+		 userList.add( new UserDto(400, "삼순이", "sam@daum.com", "010-2222-2222", false));
+		 
+		 //계좌는 6개 정도
+		 accountList.add( new AccountDto(1, "1111-11111", 1000000, 100));
+		 accountList.add( new AccountDto(2, "2222-22222", 250000, 100));
+		 accountList.add( new AccountDto(3, "3333-33333", 350000, 100));
+		 
+		 accountList.add( new AccountDto(4, "4444-44444", 150000, 200));
+		 accountList.add( new AccountDto(5, "5555-55555", 250000, 200));
+		 
+		 accountList.add( new AccountDto(6, "6666-66666", 350000, 300));
+		 
+	}//생성자 끝
 	
-		accountList[ACCOUNT_CURRENT_SIZE++] = new AccountDto(4,"444-1111",6700000, 200);
-		accountList[ACCOUNT_CURRENT_SIZE++] = new AccountDto(5,"555-1111",7800000, 200);
-		
-		accountList[ACCOUNT_CURRENT_SIZE++] = new AccountDto(6,"666-1111",900000000, 300);
-		
-	}//생성자 종료 
-	
-	public UserDto[] get() {
-		UserDto arr [] = new UserDto[10];
-		for(int i =0; i<userList.length;i++) {
-			arr[i] = userList[i];
-		}
-		return arr;
-	}
-	
-	/**
-	 *특정 사용자의 계좌 목록을 배열로 리턴 하는 메소드를 작성한다. 
-	 */
-	public AccountDto[] getAccountList(int userSeq) {
-		
-		int searchAccountcount = 0;
-		
-		for(int i =0; i<ACCOUNT_CURRENT_SIZE;i++) {
-			if(accountList[i] .userSeq == userSeq) {
-				searchAccountcount++;
-			}
-		}
-		
-		//
-		//위에서 찾은 정보를 바탕으로 AccountDto 배열에서 계좌 정보를 찾아서 리턴해준다.
-		//찾은 고객의 계좌의 수만큼 배열을 생성해서 그 배열을 리턴 
-		
-		if(searchAccountcount == 0)
-			return null;
-		AccountDto searchAccountDtoList[] = new AccountDto[searchAccountcount];
-		
-		
+    /**
+	  특정 사용자의 계좌 목록을 배열로 리턴 하는 메소드를 작성한다
+	*/
+	public ArrayList<AccountDto> getAccountList(int userSeq) {
 		int cnt = 0;
-		for(int i =0; i<ACCOUNT_CURRENT_SIZE;i++) {
-			if(accountList[i] .userSeq == userSeq) {
-				searchAccountDtoList[cnt++] = accountList[i];
+		ArrayList<AccountDto> tmparr = new ArrayList<>();
+		
+		for(AccountDto a : accountList) {
+			if(a.userSeq == userSeq) {
+				tmparr.add(a);
+				cnt++;
 			}
 		}
-		
-		
-		
-		return searchAccountDtoList;
+		if(cnt == 0) {
+			System.out.println(userSeq+"의 계좌 정보가 없네요.");
+		}
+	
+		return tmparr;
 	}
 	
+	/**
+	   특정 사용자의 고객 정보를 리턴 하는 메소드를 작성한다
+	   
+	   @param : 고객의 sequence
+	   @return : null이면 고객의정보없다 
+	**/
+	public ArrayList<UserDto> getUserDetail(int userSeq) {
+		int cnt = 0;
+		ArrayList<UserDto> tmparr = new ArrayList<>();
+		
+		for(UserDto a : userList) {
+			if(a.userSeq == userSeq) {
+				tmparr.add(a);
+				cnt++;
+			}
+		}
+		if(cnt == 0) {
+			System.out.println(userSeq+"의 계좌 정보가 없네요.");
+		}
+	
+		return tmparr;
+		
+	}
+	
+	/**
+	 * 모든 계좌의 목록 반환 
+	 * @return
+	 */
+	public ArrayList<AccountDto> getAccountList(){
+		return accountList;
+		
+	}
 	
 	
 	/**
-	 * 	특정 사용자의 고객 정보를 리턴 하는 메소드를 작성한다.
-	 * @param : 고객의 sequence
-	 * @return: null이면 고객의 정보 없다 
+	 * 잔액 수만큼 정렬된 배열 반환 
+	 * @return
 	 */
-	public UserDto getUserDetail(int userSeq) {
-		
-		for(int i =0;i<USER_CURRENT_SIZE;i++) {
-			if(userList[i].userSeq == userSeq) {
-				return userList[i];
-			}
+	public ArrayList<AccountDto> getAccountListSortByBalance(){
+		ArrayList<AccountDto> arr = new ArrayList<>();
+		for(AccountDto x : accountList) {
+			arr.add(x);
 		}
-		return null;
+		Collections.sort(arr);
+		return arr;
+		
 	}
+
+
+
+//	public static List<Student> getSortByAge(List<Student> list){
+//		//인수로 전달된 데이터를 직접 정렬하면 원본이 변경되기 때문에
+//		//복사본이 필요하다 
+//		List<Student> sortedStudentList = new ArrayList<>();
+//		for(Student st : list) {
+//			sortedStudentList.add(st);
+//		}
+//		Collections.sort(sortedStudentList, new Comparator<Student>() {
+//
+//			@Override
+//			public int compare(Student o1, Student o2) {
+//			
+//				return o1.getAge() - o1.getAge();
+//			}
+//			
+//		});
+		
+//		return sortedStudentList;
+//	}
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+

@@ -18,6 +18,24 @@ public class UserDto {
 		this.phone = phone;
 		this.isSleep = isSleep;
 	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("UserDto [userSeq=");
+		builder.append(userSeq);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", phone=");
+		builder.append(phone);
+		builder.append(", isSleep=");
+		builder.append(isSleep);
+		builder.append("]");
+		return builder.toString();
+	}
 	
 	
 }
